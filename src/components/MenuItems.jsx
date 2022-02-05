@@ -8,7 +8,7 @@ function MenuItems() {
 
 	return (
 		<Menu
-			theme='light'
+			theme='dark'
 			mode='horizontal'
 			style={{
 				display: "flex",
@@ -16,6 +16,7 @@ function MenuItems() {
 				fontWeight: "500",
 				width: "100%",
 				justifyContent: "center",
+				background: "transparent"
 			}}
 			defaultSelectedKeys={[pathname]}>
 			<Menu.Item key='/quickstart'>

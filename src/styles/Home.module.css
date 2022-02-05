@@ -1,0 +1,13 @@
+.container{
+    color: #fff;
+    font-size:4rem;
+    min-height: calc(100vh - 130px);
+}
+.text{
+text-align: center;
+}
+.earth{
+    mix-blend-mode: lighten;
+    object-fit: contain;
+    margin-top: -120px;
+}

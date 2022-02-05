@@ -1,3 +1,4 @@
+@import url("https://fonts.googleapis.com/css2?family=Manrope:wght@200;300;400;500;600;700;800&display=swap");
 *,
 *::before,
 *::after {
@@ -24,6 +25,7 @@ blockquote,
 dl,
 dd {
   margin: 0;
+  color: inherit;
 }
 
 body {
@@ -32,6 +34,8 @@ body {
   text-rendering: optimizeSpeed;
   line-height: 1.5;
   background-color: white;
+  font-family: "Manrope", sans-serif ;
+  color: #fff;
 }
 
 ul[class],

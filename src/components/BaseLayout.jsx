@@ -18,7 +18,7 @@ const styles = {
 	content: {
 		display: "flex",
 		justifyContent: "center",
-		fontFamily: "Roboto, sans-serif",
+		fontFamily: "Manrope, sans-serif",
 		color: "#041836",
 		marginTop: "130px",
 		padding: "10px",
@@ -27,14 +27,14 @@ const styles = {
 		position: "fixed",
 		zIndex: 1,
 		width: "100%",
-		background: "#fff",
+		background: "#0D0D0D",
 		display: "flex",
 		justifyContent: "space-between",
 		alignItems: "center",
-		fontFamily: "Roboto, sans-serif",
-		borderBottom: "2px solid rgba(0, 0, 0, 0.06)",
+		fontFamily: "Manrope, sans-serif",
+		borderBottom: "2px solid rgba(220, 0, 255, 0.06)",
 		padding: "0 10px",
-		boxShadow: "0 1px 10px rgb(151 164 175 / 10%)",
+		boxShadow: "0 1px 10px rgba(220, 0, 255, 0.1)",
 	},
 	headerRight: {
 		display: "flex",
@@ -42,12 +42,13 @@ const styles = {
 		alignItems: "center",
 		fontSize: "15px",
 		fontWeight: "600",
+		color: "#fff"
 	},
 };
 
 function BaseLayout({ children }) {
 	return (
-		<Layout style={{ height: "100vh", overflow: "auto" }}>
+		<Layout style={{ height: "100vh", overflow: "auto",background:"#0D0D0D" }}>
 			<Header style={styles.header}>
 				<Logo />
 				<MenuItems />
@@ -64,8 +65,8 @@ function BaseLayout({ children }) {
 				</div>
 			</Header>
 			<div style={styles.content}>{children}</div>
-			<Footer style={{ textAlign: "center" }}>
-				<Text style={{ display: "block" }}>
+			<Footer style={{ textAlign: "center" ,background:"#0D0D0D",color:'#fff'}}>
+				<Text style={{ display: "block" ,color:'#fff'}}>
 					⭐️ Please star this{" "}
 					<a
 						href='https://github.com/ethereum-boilerplate/ethereum-boilerplate/'
@@ -76,7 +77,7 @@ function BaseLayout({ children }) {
 					, every star makes us very happy!
 				</Text>
 
-				<Text style={{ display: "block" }}>
+				<Text style={{ display: "block",color:'#fff' }}>
 					🙋 You have questions? Ask them on the {""}
 					<a
 						target='_blank'
@@ -86,7 +87,7 @@ function BaseLayout({ children }) {
 					</a>
 				</Text>
 
-				<Text style={{ display: "block" }}>
+				<Text style={{ display: "block",color:'#fff' }}>
 					📖 Read more about{" "}
 					<a
 						target='_blank'
