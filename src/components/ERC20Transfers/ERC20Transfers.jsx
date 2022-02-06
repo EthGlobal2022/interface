@@ -33,14 +33,19 @@ function ERC20Transfers() {
       title: "Value",
       dataIndex: "value",
       key: "value",
-      render: (value, item) => parseFloat(Moralis.Units.FromWei(value, item.decimals).toFixed(6)),
+      render: (value, item) =>
+        parseFloat(Moralis.Units.FromWei(value, item.decimals).toFixed(6)),
     },
     {
       title: "Hash",
       dataIndex: "transaction_hash",
       key: "transaction_hash",
       render: (hash) => (
-        <a href={`${getExplorer(chainId)}tx/${hash}`} target="_blank" rel="noreferrer">
+        <a
+          href={`${getExplorer(chainId)}tx/${hash}`}
+          target="_blank"
+          rel="noreferrer"
+        >
           View Transaction
         </a>
       ),
@@ -50,7 +55,13 @@ function ERC20Transfers() {
   let key = 0;
   return (
     <div style={{ width: "65vw", padding: "15px" }}>
-      <h1>💸ERC20 Transfers</h1>
+      <div
+        style={{
+          color: "white",
+        }}
+      >
+        <h1>💸ERC20 Transfers</h1>
+      </div>
       <Skeleton loading={!ERC20Transfers}>
         <Table
           dataSource={ERC20Transfers}

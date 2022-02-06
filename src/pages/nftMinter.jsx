@@ -84,7 +84,13 @@ const nftMinter = () => {
 
   return (
     <div>
-      <h1 className={styles.label}>Mint your own Nft</h1>
+      <div
+        style={{
+          color: "white",
+        }}
+      >
+        <h1 className={styles.label}>Mint your own Nft</h1>
+      </div>
       <div className={styles.fileInput}>
         <input
           type={"string"}

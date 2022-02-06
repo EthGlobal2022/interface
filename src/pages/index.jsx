@@ -159,7 +159,13 @@ function Index() {
           >
             Web3
           </span>{" "}
-          works.
+          <div
+            style={{
+              color: "white",
+            }}
+          >
+            works.
+          </div>
         </h1>
 
         <div className={styles.newsletterInput}>
