@@ -1,15 +1,10 @@
-import React, { useEffect, useState } from "react";
-import UserCard from "./card";
-import styles from "styles/cards.module.css";
+import React, { useState } from "react";
 
 function newsFeed() {
   // function to fetch the API data
 
-  const [data, setData] = useState([]);
-
-  useEffect(()=>{
-    fetchData()
-  },[])
+  // const [data, setData] = useState("");
+  let data = "";
 
   const API_KEY = process.env.NEXT_PUBLIC_RAPID_API_KEY;
 
@@ -26,22 +21,19 @@ function newsFeed() {
         const decoder = reader.read().then((res) => {
           const decoded = new TextDecoder("utf-8").decode(res.value);
           const parsed = JSON.parse(decoded);
-          setData(parsed)
-          // console.log(data);
+          data = parsed;
+          console.log(data);
         });
       })
       .catch((err) => {
         console.error(err);
       });
   };
-console.log(data);
+
   return (
-    <div className={`container ${styles.userlist}`} >
-    <h1 style={{color: "white"}}>Daily Crypto Dose</h1>
-    <br/>
-    {data.map(user=>(
-    <UserCard user={user}/>
-    ))}
+    <div>
+      <h1>News Feed</h1>
+      <button onClick={fetchData}>Fetch Data</button>
     </div>
   );
 }

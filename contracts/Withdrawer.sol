@@ -1,5 +1,3 @@
-// Contract Address - 0x09a8710256fc891067eAdCEBF712c4D23aDe947c
-
 pragma solidity ^0.8.7;
 // SPDX-License-Identifier: MIT
 
