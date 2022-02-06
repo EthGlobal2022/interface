@@ -1,4 +1,6 @@
 import React, { useEffect, useState } from "react";
+import UserCard from "./card";
+import styles from "styles/cards.module.css";
 
 function newsFeed() {
   // function to fetch the API data
@@ -34,16 +36,12 @@ function newsFeed() {
   };
 console.log(data);
   return (
-    <div>
-      <h1>News Feed</h1>
-      {/* <button onClick={fetchData}>Fetch Data</button> */}
-      {
-        
-        data&&
-        data?.map(item=>{
-          return (<h1>{item?.title}</h1>)
-        })
-      }
+    <div className={`container ${styles.userlist}`} >
+    <h1 style={{color: "white"}}>Daily Crypto Dose</h1>
+    <br/>
+    {data.map(user=>(
+    <UserCard user={user}/>
+    ))}
     </div>
   );
 }
