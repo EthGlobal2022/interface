@@ -71,8 +71,10 @@ function Index() {
 
   async function mintToken() {
     const nftContractAddress = "0xcfFdFf29CF9747d2C235010CB1D8E62058ed8b53"; // Make this variable
-    if(chainId&&chainId?.toString()!=="0x13881"){
-
+    let chainId= await window.ethereum.request({ method: 'eth_chainId' })
+    if(chainId?.toString()!=="0x13881"){
+      setIsModalVisible(true)
+    }
     const web3 = new Web3(window.ethereum);
 
     const encodedFunction = web3.eth.abi.encodeFunctionCall(
@@ -101,7 +103,7 @@ function Index() {
     const txt = await ethereum.request({
       method: "eth_sendTransaction",
       params: [transactionParameters],
-    });}
+    });
     onClose();
   }
 

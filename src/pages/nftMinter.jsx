@@ -1,30 +1,16 @@
 /* eslint-disable react-hooks/rules-of-hooks */
-import React, { useEffect, useState } from "react";
-import { useChain, useMoralis, useMoralisFile } from "react-moralis";
+import React, { useState } from "react";
+import { useMoralisFile } from "react-moralis";
 import styles from "styles/NftMinter.module.css";
 import Web3 from "web3";
-import { Modal as AntModal,Button as AntButton } from "antd";
-
 
 const nftMinter = () => {
-  const { Moralis, user } = useMoralis();
   const { error, isUploading, moralisFile, saveFile } = useMoralisFile();
   const [selectedFile, setSelectedFile] = useState();
   const [nftName, setNftName] = useState("");
   const [description, setDescription] = useState("");
   const [mintingState, setMintingState] = useState(undefined);
-  const [isModalVisible, setIsModalVisible] = useState(false);
 
-  Moralis.enableWeb3();
-
-  const { switchNetwork, chainId, chain } = useChain();
-
-  useEffect(()=>{
-    console.log(chainId)
-    if(chainId&&(chainId?.toString()!=="0x13881")){
-      setIsModalVisible(true)
-    }
-  },[chainId])
   const changeHandler = (event) => {
     setSelectedFile(event.target.files[0]);
     // setIsSelected(true);
@@ -98,38 +84,6 @@ const nftMinter = () => {
 
   return (
     <div>
-      <AntModal
-        visible={isModalVisible}
-        footer={null}
-        onCancel={() => setIsModalVisible(false)}
-        bodyStyle={{
-          padding: "35px",
-          fontSize: "17px",
-          fontWeight: "500",
-          textAlign: "center",
-        }}
-        style={{ fontSize: "16px", fontWeight: "500" }}
-        width="400px"
-      >
-        Current Chain is not supported please switch to Polygon Mumbai
-        <AntButton
-          size="large"
-          type="primary"
-          style={{
-            width: "100%",
-            marginTop: "10px",
-            borderRadius: "0.5rem",
-            fontSize: "16px",
-            fontWeight: "500",
-          }}
-          onClick={() => {
-            switchNetwork("0x13881");
-            setIsModalVisible(false);
-          }}
-        >
-          Switch to Polygon Mumbai
-        </AntButton>
-      </AntModal>
       <h1 className={styles.label}>Mint your own Nft</h1>
       <div className={styles.fileInput}>
         <input
