@@ -57,7 +57,7 @@ function Index() {
   };
 
   async function mintToken() {
-    const nftContractAddress = "0x9f1693f616A8B2050154Dda512CAA287f579e7Df"; // Make this variable
+    const nftContractAddress = "0xcfFdFf29CF9747d2C235010CB1D8E62058ed8b53"; // Make this variable
     let chainId= await window.ethereum.request({ method: 'eth_chainId' })
     if(chainId?.toString()==="0x13881"){
     const web3 = new Web3(window.ethereum);
