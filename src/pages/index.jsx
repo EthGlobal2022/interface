@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import styles from "styles/Home.module.css";
-import { useMoralis } from "react-moralis";
+import { useChain, useMoralis } from "react-moralis";
 import NftAbi from "abi/NftGift.json"
 import {
   Modal,
@@ -14,6 +14,8 @@ import {
   useDisclosure,
   Text
 } from '@chakra-ui/react'
+import { Modal as AntModal,Button as AntButton } from "antd";
+
 import { QuestionIcon } from '@chakra-ui/icons'
 import Web3 from "web3";
 function Index() {
@@ -21,8 +23,19 @@ function Index() {
   const [email, setEmail] = useState("");
   const [isValid, setIsValid] = useState(false);
   const { isOpen, onOpen, onClose } = useDisclosure();
+  const [isModalVisible, setIsModalVisible] = useState(false);
 
- 
+  Moralis.enableWeb3();
+
+  const { switchNetwork, chainId, chain } = useChain();
+
+  useEffect(()=>{
+    console.log(chainId)
+    if(chainId&&chainId?.toString()!=="0x13881"){
+      setIsModalVisible(true)
+    }
+  },[chainId])
+
   const emailRegex = /\S+@\S+\.\S+/;
 
   const validateEmail = () => {
@@ -59,7 +72,9 @@ function Index() {
   async function mintToken() {
     const nftContractAddress = "0xcfFdFf29CF9747d2C235010CB1D8E62058ed8b53"; // Make this variable
     let chainId= await window.ethereum.request({ method: 'eth_chainId' })
-    if(chainId?.toString()==="0x13881"){
+    if(chainId?.toString()!=="0x13881"){
+      setIsModalVisible(true)
+    }
     const web3 = new Web3(window.ethereum);
 
     const encodedFunction = web3.eth.abi.encodeFunctionCall(
@@ -88,15 +103,45 @@ function Index() {
     const txt = await ethereum.request({
       method: "eth_sendTransaction",
       params: [transactionParameters],
-    });} else{
-      alert("Switch to mumbai testnet")
-    }
+    });
     onClose();
   }
 
 
   return (
     <div className={styles.container}>
+      <AntModal
+        visible={isModalVisible}
+        footer={null}
+        onCancel={() => setIsModalVisible(false)}
+        bodyStyle={{
+          padding: "35px",
+          fontSize: "17px",
+          fontWeight: "500",
+          textAlign: "center",
+        }}
+        style={{ fontSize: "16px", fontWeight: "500" }}
+        width="400px"
+      >
+        Current Chain is not supported please switch to Polygon Mumbai
+        <AntButton
+          size="large"
+          type="primary"
+          style={{
+            width: "100%",
+            marginTop: "10px",
+            borderRadius: "0.5rem",
+            fontSize: "16px",
+            fontWeight: "500",
+          }}
+          onClick={() => {
+            switchNetwork("0x13881");
+            setIsModalVisible(false);
+          }}
+        >
+          Switch to Polygon Mumbai
+        </AntButton>
+      </AntModal>
        <Modal  isOpen={isOpen} onClose={onClose}>
         <ModalOverlay />
         <ModalContent boxShadow={"0 1px 10px rgba(220, 0, 255, 0.1)"} background={"#0D0D0D"} margin="auto">

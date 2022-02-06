@@ -10,13 +10,17 @@ const styles = {
     alignItems: "center",
     height: "42px",
     fontWeight: "500",
-    fontFamily: "Roboto, sans-serif",
+    fontFamily: "Manrope, sans-serif",
     fontSize: "14px",
     padding: "0 10px",
+    background: "#492966",
+    color: "#fff",
   },
   button: {
-    border: "2px solid rgb(231, 234, 243)",
-    borderRadius: "12px",
+    background: "#492966",
+    border: "2px solid #DC00FF",
+    borderRadius: "0.5rem",
+    color: "#fff",
   },
 };
 
