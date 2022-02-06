@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Menu, Dropdown, Button } from "antd";
+import { Menu, Dropdown, Button, Modal } from "antd";
 import { DownOutlined } from "@ant-design/icons";
 import { AvaxLogo, PolygonLogo, BSCLogo, ETHLogo } from "./Logos";
 import { useChain, useMoralis } from "react-moralis";
@@ -10,18 +10,13 @@ const styles = {
     alignItems: "center",
     height: "42px",
     fontWeight: "500",
-    fontFamily: "Manrope, sans-serif",
+    fontFamily: "Roboto, sans-serif",
     fontSize: "14px",
     padding: "0 10px",
-    background: "#492966",
-
-    color: "#fff",
   },
   button: {
-    background: "#492966",
-    border: "2px solid #DC00FF",
-    borderRadius: "0.5rem",
-    color: "#fff",
+    border: "2px solid rgb(231, 234, 243)",
+    borderRadius: "12px",
   },
 };
 
@@ -31,39 +26,9 @@ const menuItems = [
     value: "Ethereum",
     icon: <ETHLogo />,
   },
-  // {
-  // 	key: "0x539",
-  // 	value: "Local Chain",
-  // 	icon: <ETHLogo />,
-  // },
-  // {
-  // 	key: "0x3",
-  // 	value: "Ropsten Testnet",
-  // 	icon: <ETHLogo />,
-  // },
-  // {
-  // 	key: "0x4",
-  // 	value: "Rinkeby Testnet",
-  // 	icon: <ETHLogo />,
-  // },
-  // {
-  // 	key: "0x2a",
-  // 	value: "Kovan Testnet",
-  // 	icon: <ETHLogo />,
-  // },
-  // {
-  // 	key: "0x5",
-  // 	value: "Goerli Testnet",
-  // 	icon: <ETHLogo />,
-  // },
   {
     key: "0x38",
     value: "Binance",
-    icon: <BSCLogo />,
-  },
-  {
-    key: "0x61",
-    value: "Smart Chain Testnet",
     icon: <BSCLogo />,
   },
   {
@@ -76,41 +41,28 @@ const menuItems = [
     value: "Mumbai",
     icon: <PolygonLogo />,
   },
-  // {
-  // 	key: "0xa86a",
-  // 	value: "Avalanche",
-  // 	icon: <AvaxLogo />,
-  // },
 ];
 
 function Chains() {
+  const { Moralis } = useMoralis();
+  Moralis.enableWeb3();
+
   const { switchNetwork, chainId, chain } = useChain();
   const [selected, setSelected] = useState({});
-
+  const [isModalVisible, setIsModalVisible] = useState(false);
   console.log("chain", chain);
-  const { isWeb3Enabled, enableWeb3, isAuthenticated, isWeb3EnableLoading } =
-    useMoralis();
-
-  useEffect(() => {
-    if (isAuthenticated && !isWeb3Enabled && !isWeb3EnableLoading) enableWeb3();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [isAuthenticated, isWeb3Enabled]);
-
   useEffect(() => {
     if (!chainId) return null;
     const newSelected = menuItems.find((item) => item.key === chainId);
+    if (!newSelected) setIsModalVisible(true);
+
     setSelected(newSelected);
     console.log("current chainId: ", chainId);
   }, [chainId]);
 
   const handleMenuClick = (e) => {
-    try {
-      console.log("switch to: ", e.key);
-      switchNetwork(e.key);
-    } catch (_error) {
-      console.log(_error);
-      handleMenuClick(e);
-    }
+    console.log("switch to: ", e.key);
+    switchNetwork(e.key);
   };
 
   const menu = (
@@ -124,12 +76,8 @@ function Chains() {
   );
 
   return (
-    <div>
-      <Dropdown
-        style={{ borderRadius: "0.5rem" }}
-        overlay={menu}
-        trigger={["click"]}
-      >
+    <div style={{ position: "relative" }}>
+      <Dropdown overlay={menu} trigger={["click"]}>
         <Button
           key={selected?.key}
           icon={selected?.icon}
@@ -139,6 +87,38 @@ function Chains() {
           <DownOutlined />
         </Button>
       </Dropdown>
+      <Modal
+        visible={isModalVisible}
+        footer={null}
+        onCancel={() => setIsModalVisible(false)}
+        bodyStyle={{
+          padding: "35px",
+          fontSize: "17px",
+          fontWeight: "500",
+          textAlign: "center",
+        }}
+        style={{ fontSize: "16px", fontWeight: "500" }}
+        width="400px"
+      >
+        Current Chain is not supported please switch to Polygon
+        <Button
+          size="large"
+          type="primary"
+          style={{
+            width: "100%",
+            marginTop: "10px",
+            borderRadius: "0.5rem",
+            fontSize: "16px",
+            fontWeight: "500",
+          }}
+          onClick={() => {
+            switchNetwork("0x13881");
+            setIsModalVisible(false);
+          }}
+        >
+          Switch to Polygon
+        </Button>
+      </Modal>
     </div>
   );
 }
