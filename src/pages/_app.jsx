@@ -3,7 +3,7 @@ import { MoralisProvider } from "react-moralis";
 import Head from "next/head";
 
 import BaseLayout from "components/BaseLayout";
-
+import { ChakraProvider } from '@chakra-ui/react'
 import "styles/index.css";
 
 /** Get your free Moralis Account https://moralis.io/ */
@@ -17,13 +17,15 @@ const Application = ({ Component, pageProps }) => {
 	return (
 		<>
 			<Head>
-				<title>Nextjs Ethereum BoilerPlate</title>
+				<title>DecentraSchool</title>
 			</Head>
+			< ChakraProvider> 
 			<MoralisProvider appId={APP_ID} serverUrl={SERVER_URL}>
 				<BaseLayout>
 					<Component {...pageProps} isServerInfo={isServerInfo} />
 				</BaseLayout>
 			</MoralisProvider>
+			</ChakraProvider>
 		</>
 	);
 };

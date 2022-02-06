@@ -1,24 +1,43 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useRouter } from "next/router";
 import { Menu } from "antd";
 import Link from "next/link";
+import {
+	Drawer,
+	DrawerBody,
+	DrawerFooter,
+	DrawerHeader,
+	DrawerOverlay,
+	DrawerContent,
+	DrawerCloseButton,
+  } from '@chakra-ui/react'
 
-function MenuItems() {
+function MenuItems({ isOpen,  onClose }) {
 	const { pathname } = useRouter();
-
+useEffect(()=>{
+	onClose()
+},[pathname])
 	return (
+		<Drawer placement={'left'} onClose={onClose} isOpen={isOpen}>
+        <DrawerOverlay backdropBlur={"2px"}/>
+        <DrawerContent>
+          {/* <DrawerHeader background={"#492966"} color="#fff" borderBottomWidth='1px'>Side Drawer</DrawerHeader> */}
+          <DrawerBody padding={"0"} background={"#492966"} >
 		<Menu
 			theme='dark'
-			mode='horizontal'
+			mode='vertical'
 			style={{
 				display: "flex",
+				flexDirection:"column",
 				fontSize: "17px",
 				fontWeight: "500",
 				width: "100%",
 				justifyContent: "center",
 				background: "transparent"
 			}}
-			defaultSelectedKeys={[pathname]}>
+			defaultSelectedKeys={[pathname]}
+			// inlineCollapsed={open}
+			>
 
 			<Menu.Item key='/1inch'>
 				<Link href='/1inch'>
@@ -48,6 +67,9 @@ function MenuItems() {
 			</Menu.Item>
 
 		</Menu>
+		</DrawerBody>
+        </DrawerContent>
+      </Drawer>
 	);
 }
 

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Layout } from "antd";
 import Text from "antd/lib/typography/Text";
 
@@ -11,6 +11,8 @@ import Logo from "./Logo";
 
 import "antd/dist/antd.css";
 import "styles/style.module.css";
+import { MenuFoldOutlined, MenuUnfoldOutlined } from "@ant-design/icons";
+import { useDisclosure } from "@chakra-ui/react";
 
 const { Header, Footer } = Layout;
 
@@ -44,14 +46,33 @@ const styles = {
 		fontWeight: "600",
 		color: "#fff"
 	},
+	headerLeft: {
+		display: "flex",
+		gap: "20px",
+		alignItems: "center",
+		fontSize: "15px",
+		fontWeight: "600",
+		color: "#fff"
+	},
 };
 
 function BaseLayout({ children }) {
-	return (
+	const { isOpen, onOpen, onClose } = useDisclosure()
+		return (
 		<Layout style={{ height: "100vh", overflow: "auto",background:"#0D0D0D" }}>
 			<Header style={styles.header}>
+			<div style={styles.headerLeft}>
+				<button style={{background:"transparent",border:"none",outline:"none",display:"flex",background:"#492966",
+		border: "2px solid #DC00FF",color:"#fff",fontSize:"1.5rem",padding:"0.25rem 0.75rem",borderRadius:"0.5rem"}} onClick={()=>{
+					if(isOpen)
+					onClose()
+					else
+					onOpen()}}>
+				{isOpen?<MenuUnfoldOutlined  theme="dark"/>:<MenuFoldOutlined theme="dark"/>}
+				</button>
 				<Logo />
-				<MenuItems />
+				</div>
+
 				<div style={styles.headerRight}>
 					<Chains />
 					<TokenPrice
@@ -64,39 +85,10 @@ function BaseLayout({ children }) {
 					<Account />
 				</div>
 			</Header>
-			<div style={styles.content}>{children}</div>
-			<Footer style={{ textAlign: "center" ,background:"#0D0D0D",color:'#fff'}}>
-				<Text style={{ display: "block" ,color:'#fff'}}>
-					⭐️ Please star this{" "}
-					<a
-						href='https://github.com/ethereum-boilerplate/ethereum-boilerplate/'
-						target='_blank'
-						rel='noopener noreferrer'>
-						boilerplate
-					</a>
-					, every star makes us very happy!
-				</Text>
-
-				<Text style={{ display: "block",color:'#fff' }}>
-					🙋 You have questions? Ask them on the {""}
-					<a
-						target='_blank'
-						rel='noopener noreferrer'
-						href='https://forum.moralis.io/t/ethereum-boilerplate-questions/3951/29'>
-						Moralis forum
-					</a>
-				</Text>
-
-				<Text style={{ display: "block",color:'#fff' }}>
-					📖 Read more about{" "}
-					<a
-						target='_blank'
-						rel='noopener noreferrer'
-						href='https://moralis.io?utm_source=boilerplatehosted&utm_medium=todo&utm_campaign=ethereum-boilerplate'>
-						Moralis
-					</a>
-				</Text>
-			</Footer>
+			<div style={styles.content}>
+				<MenuItems isOpen={isOpen}  onClose={onClose}/>
+				{children}
+			</div>
 		</Layout>
 	);
 }

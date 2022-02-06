@@ -4,7 +4,7 @@ import { Tabs } from "antd";
 
 function OneInch() {
 	return (
-		<Tabs defaultActiveKey='1' style={{ alignItems: "center" }}>
+		<Tabs defaultActiveKey='1' style={{ alignItems: "center",color:"#fff" }}>
 			<Tabs.TabPane tab={<span>Ethereum</span>} key='1'>
 				<InchDex chain='eth' />
 			</Tabs.TabPane>
