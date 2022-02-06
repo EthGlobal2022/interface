@@ -3,8 +3,7 @@ import React, { useEffect, useState } from "react";
 import { useChain, useMoralis, useMoralisFile } from "react-moralis";
 import styles from "styles/NftMinter.module.css";
 import Web3 from "web3";
-import { Modal as AntModal,Button as AntButton } from "antd";
-
+import { Modal as AntModal, Button as AntButton } from "antd";
 
 const nftMinter = () => {
   const { Moralis, user } = useMoralis();
@@ -19,12 +18,12 @@ const nftMinter = () => {
 
   const { switchNetwork, chainId, chain } = useChain();
 
-  useEffect(()=>{
-    console.log(chainId)
-    if(chainId&&(chainId?.toString()!=="0x13881")){
-      setIsModalVisible(true)
+  useEffect(() => {
+    console.log(chainId);
+    if (chainId && chainId?.toString() !== "0x13881") {
+      setIsModalVisible(true);
     }
-  },[chainId])
+  }, [chainId]);
   const changeHandler = (event) => {
     setSelectedFile(event.target.files[0]);
     // setIsSelected(true);
@@ -45,13 +44,15 @@ const nftMinter = () => {
       };
 
       setMintingState("Uploading Metadata in IPFS");
-      const metadataJson = await saveFile(
-        "metadata.json",
-        {
-          base64: window.btoa(JSON.stringify(metadata)),
-        },
-        { saveIPFS: true }
-      );
+      if (typeof window !== "undefined") {
+        const metadataJson = await saveFile(
+          "metadata.json",
+          {
+            base64: window.btoa(JSON.stringify(metadata)),
+          },
+          { saveIPFS: true }
+        );
+      }
 
       console.log(metadataJson);
       setMintingState("Getting Minting Approval");
@@ -67,8 +68,9 @@ const nftMinter = () => {
     // Ethereum Rinkeby 0x0Fb6EF3505b9c52Ed39595433a21aF9B5FCc4431
     // Polygon Mumbai 0x351bbee7C6E9268A1BF741B098448477E08A0a53
     // BSC Testnet 0x88624DD1c725C6A95E223170fa99ddB22E1C6DDD
-
-    const web3 = new Web3(window.ethereum);
+    if (typeof window !== "undefined") {
+      const web3 = new Web3(window.ethereum);
+    }
 
     const encodedFunction = web3.eth.abi.encodeFunctionCall(
       {
