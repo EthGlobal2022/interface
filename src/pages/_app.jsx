@@ -5,6 +5,14 @@ import Head from "next/head";
 import BaseLayout from "components/BaseLayout";
 import { ChakraProvider } from '@chakra-ui/react'
 import "styles/index.css";
+import { extendTheme } from '@chakra-ui/react'
+
+const theme = extendTheme({
+  fonts: {
+    heading: 'Manrope',
+    body: 'Manrope',
+  },
+})
 
 /** Get your free Moralis Account https://moralis.io/ */
 
@@ -19,7 +27,7 @@ const Application = ({ Component, pageProps }) => {
 			<Head>
 				<title>DecentraSchool</title>
 			</Head>
-			< ChakraProvider> 
+			< ChakraProvider theme={theme}> 
 			<MoralisProvider appId={APP_ID} serverUrl={SERVER_URL}>
 				<BaseLayout>
 					<Component {...pageProps} isServerInfo={isServerInfo} />
