@@ -6,6 +6,6 @@ import "https://github.com/OpenZeppelin/openzeppelin-contracts/blob/v3.4.0-solc-
 contract Token is ERC20 {
 
     constructor () ERC20("Embark", "MBRK") {
-        _mint(msg.sender, 100101 * (10 ** uint256(decimals())));
+        _mint(msg.sender, 1000000 * (10 ** uint256(decimals())));
     }
 }
