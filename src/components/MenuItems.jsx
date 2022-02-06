@@ -22,7 +22,7 @@ useEffect(()=>{
         <DrawerOverlay backdropBlur={"2px"}/>
         <DrawerContent>
           {/* <DrawerHeader background={"#492966"} color="#fff" borderBottomWidth='1px'>Side Drawer</DrawerHeader> */}
-          <DrawerBody padding={"0"} background={"#492966"} >
+          <DrawerBody pt="2rem" px={"0"} background={"#492966"} >
 		<Menu
 			theme='dark'
 			mode='vertical'
