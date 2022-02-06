@@ -55,13 +55,10 @@ function ERC20Transfers() {
   let key = 0;
   return (
     <div style={{ width: "65vw", padding: "15px" }}>
-      <div
-        style={{
-          color: "white",
-        }}
-      >
-        <h1>💸ERC20 Transfers</h1>
-      </div>
+      
+        <div style={{
+              color: "white",
+            }}>💸ERC20 Transfers</div>
       <Skeleton loading={!ERC20Transfers}>
         <Table
           dataSource={ERC20Transfers}

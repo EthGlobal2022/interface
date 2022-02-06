@@ -144,14 +144,12 @@ function Index() {
       <div className={styles.content}>
         {/* <Button onClick={onOpen}>Open Modal</Button> */}
 
-        <div
-          style={{
-            color: "white",
-          }}
-        >
-          Learn how the
-        </div>
-        <h1>
+        <div style={{
+              color: "white",
+            }}>Learn how the</div>
+        <div style={{
+              color: "white",
+            }}>
           <span
             style={{
               color: "#DC00FF",
@@ -159,14 +157,8 @@ function Index() {
           >
             Web3
           </span>{" "}
-          <div
-            style={{
-              color: "white",
-            }}
-          >
-            works.
-          </div>
-        </h1>
+          works.
+        </div>
 
         <div className={styles.newsletterInput}>
           <input
