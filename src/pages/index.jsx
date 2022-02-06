@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import styles from "styles/Home.module.css";
 import { useChain, useMoralis } from "react-moralis";
-import NftAbi from "abi/NftGift.json";
+import NftAbi from "abi/NftGift.json"
 import {
   Modal,
   ModalOverlay,
@@ -12,11 +12,11 @@ import {
   ModalCloseButton,
   Button,
   useDisclosure,
-  Text,
-} from "@chakra-ui/react";
-import { Modal as AntModal, Button as AntButton } from "antd";
+  Text
+} from '@chakra-ui/react'
+import { Modal as AntModal,Button as AntButton } from "antd";
 
-import { QuestionIcon } from "@chakra-ui/icons";
+import { QuestionIcon } from '@chakra-ui/icons'
 import Web3 from "web3";
 function Index() {
   const { Moralis, user } = useMoralis();
@@ -29,12 +29,12 @@ function Index() {
 
   const { switchNetwork, chainId, chain } = useChain();
 
-  useEffect(() => {
-    console.log(chainId);
-    if (chainId && chainId?.toString() !== "0x13881") {
-      setIsModalVisible(true);
+  useEffect(()=>{
+    console.log(chainId)
+    if(chainId&&chainId?.toString()!=="0x13881"){
+      setIsModalVisible(true)
     }
-  }, [chainId]);
+  },[chainId])
 
   const emailRegex = /\S+@\S+\.\S+/;
 
@@ -60,8 +60,8 @@ function Index() {
         const newRow = new EmailIds();
         newRow.set("email", email);
         newRow.set("user", user);
-        await newRow.save();
-        onOpen();
+        await newRow.save()
+        onOpen()
         // mintToken()
       } else {
         alert("Email already exists");
@@ -71,40 +71,40 @@ function Index() {
 
   async function mintToken() {
     const nftContractAddress = "0xcfFdFf29CF9747d2C235010CB1D8E62058ed8b53"; // Make this variable
-    if (chainId && chainId?.toString() !== "0x13881") {
-      if (typeof window !== "undefined") {
-        const web3 = new Web3(window.ethereum);
+    if(chainId&&chainId?.toString()!=="0x13881"){
+
+    const web3 = new Web3(window.ethereum);
+
+    const encodedFunction = web3.eth.abi.encodeFunctionCall(
+      {
+        "inputs": [],
+        "name": "getRandomBox",
+        "outputs": [
+          {
+            "internalType": "bytes32",
+            "name": "",
+            "type": "bytes32"
+          }
+        ],
+        "stateMutability": "nonpayable",
+        "type": "function"
       }
+      ,
+      []
+    );
 
-      const encodedFunction = web3.eth.abi.encodeFunctionCall(
-        {
-          inputs: [],
-          name: "getRandomBox",
-          outputs: [
-            {
-              internalType: "bytes32",
-              name: "",
-              type: "bytes32",
-            },
-          ],
-          stateMutability: "nonpayable",
-          type: "function",
-        },
-        []
-      );
-
-      const transactionParameters = {
-        to: nftContractAddress,
-        from: ethereum.selectedAddress,
-        data: encodedFunction,
-      };
-      const txt = await ethereum.request({
-        method: "eth_sendTransaction",
-        params: [transactionParameters],
-      });
-    }
+    const transactionParameters = {
+      to: nftContractAddress,
+      from: ethereum.selectedAddress,
+      data: encodedFunction,
+    };
+    const txt = await ethereum.request({
+      method: "eth_sendTransaction",
+      params: [transactionParameters],
+    });}
     onClose();
   }
+
 
   return (
     <div className={styles.container}>
@@ -140,46 +140,31 @@ function Index() {
           Switch to Polygon Mumbai
         </AntButton>
       </AntModal>
-      <Modal isOpen={isOpen} onClose={onClose}>
+       <Modal  isOpen={isOpen} onClose={onClose}>
         <ModalOverlay />
-        <ModalContent
-          boxShadow={"0 1px 10px rgba(220, 0, 255, 0.1)"}
-          background={"#0D0D0D"}
-          margin="auto"
-        >
+        <ModalContent boxShadow={"0 1px 10px rgba(220, 0, 255, 0.1)"} background={"#0D0D0D"} margin="auto">
           <ModalHeader color={"#fff"}>Subscription Succesful</ModalHeader>
-          <ModalCloseButton color={"#fff"} />
-          <ModalBody
-            display={"flex"}
-            flexDirection="column"
-            alignItems={"center"}
-            justifyContent="center"
-          >
-            <div
-              style={{
-                border: "1px solid #DC00FF",
-                borderRadius: "1rem",
-                padding: "0.625rem",
-                display: "flex",
-                background: "rgba(27, 0, 32, 0.5)",
-              }}
-            >
-              <QuestionIcon fontSize={"7rem"} color="rgba(220, 0, 255, 0.5)" />
+          <ModalCloseButton color={"#fff"}/>
+          <ModalBody display={"flex"} flexDirection="column" alignItems={"center"} justifyContent="center">
+            
+            <div style={
+              {
+                border:"1px solid #DC00FF",
+                borderRadius:"1rem",
+                padding:"0.625rem",
+                display:"flex",
+                background:"rgba(27, 0, 32, 0.5)"
+              }
+            }>
+<QuestionIcon fontSize={"7rem"} color="rgba(220, 0, 255, 0.5)"/>
             </div>
             <Text align={"center"} mt="1rem" fontSize={"1rem"} color="#fff">
-              Get A Random NFT!
+              Get A Random NFT! 
             </Text>
           </ModalBody>
 
           <ModalFooter>
-            <Button
-              _active={{ background: "#DC00FF" }}
-              background={"#DC00FF"}
-              color={"#fff"}
-              fontWeight="700"
-              w="100%"
-              onClick={mintToken}
-            >
+            <Button _active={{background:"#DC00FF"}} background={"#DC00FF"} color={"#fff"} fontWeight="700" w="100%" onClick={mintToken}>
               Get Your Nft Gift
             </Button>
             {/* <Button variant='ghost'>Secondary Action</Button> */}
@@ -187,7 +172,7 @@ function Index() {
         </ModalContent>
       </Modal>
       <div className={styles.content}>
-        {/* <Button onClick={onOpen}>Open Modal</Button> */}
+      {/* <Button onClick={onOpen}>Open Modal</Button> */}
 
         <h1>Learn how the</h1>
         <h1>

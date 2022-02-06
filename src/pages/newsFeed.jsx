@@ -7,9 +7,9 @@ function newsFeed() {
 
   const [data, setData] = useState([]);
 
-  useEffect(() => {
-    fetchData();
-  }, []);
+  useEffect(()=>{
+    fetchData()
+  },[])
 
   const API_KEY = process.env.NEXT_PUBLIC_RAPID_API_KEY;
 
@@ -26,7 +26,7 @@ function newsFeed() {
         const decoder = reader.read().then((res) => {
           const decoded = new TextDecoder("utf-8").decode(res.value);
           const parsed = JSON.parse(decoded);
-          setData(parsed);
+          setData(parsed)
           // console.log(data);
         });
       })
@@ -34,14 +34,14 @@ function newsFeed() {
         console.error(err);
       });
   };
-  console.log(data);
+console.log(data);
   return (
-    <div className={`container ${styles.userlist}`}>
-      <h1 style={{ color: "white", textalign: "center" }}>Daily Crypto Dose</h1>
-      <br />
-      {data.map((user) => (
-        <UserCard user={user} />
-      ))}
+    <div className={`container ${styles.userlist}`} >
+    <h1 style={{color: "white"}}>Daily Crypto Dose</h1>
+    <br/>
+    {data.map(user=>(
+    <UserCard user={user}/>
+    ))}
     </div>
   );
 }
