@@ -3,7 +3,8 @@ import React, { useState } from "react";
 function newsFeed() {
   // function to fetch the API data
 
-  const [data, setData] = useState("");
+  // const [data, setData] = useState("");
+  let data = "";
 
   const API_KEY = process.env.NEXT_PUBLIC_RAPID_API_KEY;
 
@@ -19,8 +20,9 @@ function newsFeed() {
         const reader = response.body.getReader();
         const decoder = reader.read().then((res) => {
           const decoded = new TextDecoder("utf-8").decode(res.value);
-          setData(decoded);
-          console.log(decoded);
+          const parsed = JSON.parse(decoded);
+          data = parsed;
+          console.log(data);
         });
       })
       .catch((err) => {
