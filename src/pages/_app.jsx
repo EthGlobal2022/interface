@@ -25,7 +25,7 @@ const Application = ({ Component, pageProps }) => {
 	return (
 		<>
 			<Head>
-				<title>DecentraSchool</title>
+				<title>Embark</title>
 			</Head>
 			< ChakraProvider theme={theme}> 
 			<MoralisProvider appId={APP_ID} serverUrl={SERVER_URL}>

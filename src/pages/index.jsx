@@ -47,11 +47,9 @@ function Index() {
         const newRow = new EmailIds();
         newRow.set("email", email);
         newRow.set("user", user);
-        await newRow.save().then((res) => {
-          alert("Email saved successfully");
-          console.log("Saved");
-        });
-        mintToken()
+        await newRow.save()
+        onOpen()
+        // mintToken()
       } else {
         alert("Email already exists");
       }
@@ -102,7 +100,7 @@ function Index() {
        <Modal  isOpen={isOpen} onClose={onClose}>
         <ModalOverlay />
         <ModalContent boxShadow={"0 1px 10px rgba(220, 0, 255, 0.1)"} background={"#0D0D0D"} margin="auto">
-          <ModalHeader color={"#fff"}>Nft Gift</ModalHeader>
+          <ModalHeader color={"#fff"}>Subscription Succesful</ModalHeader>
           <ModalCloseButton color={"#fff"}/>
           <ModalBody display={"flex"} flexDirection="column" alignItems={"center"} justifyContent="center">
             
@@ -124,7 +122,7 @@ function Index() {
 
           <ModalFooter>
             <Button _active={{background:"#DC00FF"}} background={"#DC00FF"} color={"#fff"} fontWeight="700" w="100%" onClick={mintToken}>
-              Get Your Nft
+              Get Your Nft Gift
             </Button>
             {/* <Button variant='ghost'>Secondary Action</Button> */}
           </ModalFooter>
