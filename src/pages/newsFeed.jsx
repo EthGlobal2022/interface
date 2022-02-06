@@ -1,3 +1,5 @@
+/* eslint-disable react-hooks/rules-of-hooks */
+/* eslint-disable react/jsx-key */
 import React, { useEffect, useState } from "react";
 import UserCard from "./card";
 import styles from "styles/cards.module.css";
