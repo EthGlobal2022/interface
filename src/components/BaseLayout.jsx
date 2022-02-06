@@ -19,7 +19,7 @@ const styles = {
 		display: "flex",
 		justifyContent: "center",
 		fontFamily: "Manrope, sans-serif",
-		color: "#041836",
+		color: "#fff",
 		marginTop: "130px",
 		padding: "10px",
 	},
