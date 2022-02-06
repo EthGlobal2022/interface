@@ -4,7 +4,7 @@ import styles from "styles/cards.module.css";
 const UserCard = ({ user }) => {
   return (
     <div className={styles.card} style={{ margin: "12px 0px" }}>
-      <a href={user.url} target="_blank">
+      <a href={user.url} target="_blank" rel="noopener noreferrer">
         <div className={styles.container}>
           <h4>
             <b>{user.title}</b>
