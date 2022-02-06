@@ -64,11 +64,11 @@ function MenuItems({ isOpen, onClose }) {
                 <a>🖼 Minter</a>
               </Link>
             </Menu.Item>
-            <Menu.Item key="/newsFeed">
+            {/* <Menu.Item key="/newsFeed">
               <Link href="/newsFeed">
                 <a>📰 News</a>
               </Link>
-            </Menu.Item>
+            </Menu.Item> */}
           </Menu>
         </DrawerBody>
       </DrawerContent>
